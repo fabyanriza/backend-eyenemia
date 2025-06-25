@@ -27,4 +27,4 @@ COPY . .
 EXPOSE 5000
 
 # Gunicorn command, pastikan backend.py memiliki variabel Flask bernama 'app'
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "backend:app"]
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "backend:app"]

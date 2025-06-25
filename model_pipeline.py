@@ -56,7 +56,7 @@ def run_prediction_pipeline(image_path):
 
     # 1. SEGMENTASI
     # Prediksi menggunakan model segmentasi dengan conf=0.25 seperti di notebook
-    seg_results = segmentation_model.predict(source=image_path, conf=0.25, verbose=False)
+    seg_results = segmentation_model.predict(source=image_path, conf=0.25, device='cpu', verbose=False)
     
     result = seg_results[0]
     if result.masks is None or len(result.masks.data) == 0:
@@ -89,7 +89,7 @@ def run_prediction_pipeline(image_path):
     img_for_classification = img_letterboxed.convert("RGB")
     
     # Lakukan prediksi klasifikasi
-    cls_results = classification_model.predict(source=img_for_classification, verbose=False)
+    cls_results = classification_model.predict(source=img_for_classification, device='cpu', verbose=False)
     
     cls_result = cls_results[0]
     if cls_result.probs is None:
