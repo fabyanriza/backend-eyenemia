@@ -6,6 +6,6 @@ opencv-python-headless==4.8.0.76
 Pillow==9.5.0
 torch==2.1.0
 torchvision==0.16.0
-torchaudio==2.1.0+cpu
+torchaudio==2.1.0
 ultralytics==8.0.197
 fpdf==1.7.2
