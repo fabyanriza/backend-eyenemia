@@ -4,5 +4,5 @@ gunicorn==20.1.0
 numpy==1.23.5
 opencv-python-headless==4.8.0.76
 Pillow==9.5.0
-ultralytics==8.0.20
+ultralytics==8.0.197
 fpdf==1.7.2
