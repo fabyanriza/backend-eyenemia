@@ -24,26 +24,13 @@ app.secret_key = 'kunci-rahasia-super-aman'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 MIN_IMAGE_SIZE = (120, 120)
 MAX_IMAGE_SIZE = (7680, 4320)
-DB_NAME = 'riwayat.db'
 # Ambang batas untuk deteksi blur. Nilai yang lebih rendah berarti gambar harus lebih buram untuk ditolak.
 # Anda mungkin perlu menyesuaikan nilai ini setelah melakukan beberapa tes.
-BLUR_THRESHOLD = 30
+BLUR_THRESHOLD = 25
 
-def init_db():
-    """Membuat tabel database jika belum ada."""
-    with sqlite3.connect(DB_NAME) as conn:
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS riwayat (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nama TEXT NOT NULL,
-                usia INTEGER NOT NULL,
-                gender TEXT NOT NULL,
-                gambar TEXT NOT NULL,
-                hasil TEXT,
-                confidence REAL,
-                timestamp TEXT NOT NULL
-            )
-        ''')
+
+
+           
 
 def allowed_file(filename):
     """Memeriksa apakah format file diizinkan."""
@@ -124,10 +111,7 @@ def api_predict():
             hasil, confidence = run_prediction_pipeline(filepath)
             waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            with sqlite3.connect(DB_NAME) as conn:
-                conn.execute('''INSERT INTO riwayat (nama, usia, gender, gambar, hasil, confidence, timestamp)
-                                VALUES (?, ?, ?, ?, ?, ?, ?)''',
-                            (nama, usia, gender, filename, hasil, confidence, waktu))
+
 
             return jsonify({
                 "prediction": hasil,
@@ -158,6 +142,6 @@ def index():
 if __name__ == '__main__':
     if not os.path.exists(UPLOAD_FOLDER):
         os.makedirs(UPLOAD_FOLDER)
-    init_db()
+   
     app.run(host='0.0.0.0', debug=True, port=5000)
 
