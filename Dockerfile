@@ -20,8 +20,7 @@ RUN pip install --upgrade pip \
      -f https://download.pytorch.org/whl/cpu/torch_stable.html \
  && pip install --no-cache-dir -r requirements.txt
 
-# Copy project files
-COPY models/ ./models/
+
 
 COPY . .
 
